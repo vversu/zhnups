@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public final class GitHubLinkHandler implements LinkHandler {
 
-    private static final String GITHUB_PATTERN = "^https?://github.com/(?<user>[^/]+)/(?<repo>[^/]+)/?$";
+    private static final String GITHUB_PATTERN = "^https?://github.com/(?<user>[^/]+)/(?<repo>[^/]+)((\\/[-a-zA-Z0-9_]*)*)$";
 
     public boolean canHandle(String url) {
         return url.matches(GITHUB_PATTERN);

@@ -12,11 +12,11 @@ public class LinkParser {
     }
 
     public Object parse(String url) throws MalformedURLException {
-        for (LinkHandler handler : handlers) {
-            if (handler.canHandle(url)) {
-                return handler.handle(url);
-            }
-        }
-        return null;
+    	  for (LinkHandler handler : handlers) {
+    	    if (handler.canHandle(url)) {
+    	      return handler.handle(url);
+    	    }
+    	  }
+    	  return null;
     }
 }
