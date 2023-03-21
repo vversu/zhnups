@@ -1,1 +1,2 @@
-app.test=1234
+app:
+   test=1234
