@@ -1,11 +1,12 @@
 package ru.tinkoff.edu.java.bot;
 
-import ru.tinkoff.edu.java.dto.ApiErrorResponse;
-import ru.tinkoff.edu.java.dto.LinkUpdate;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import ru.tinkoff.edu.java.bot.dto.ApiErrorResponse;
+import ru.tinkoff.edu.java.bot.dto.LinkUpdate;
 
 @RestController
 @RequestMapping("/updates")

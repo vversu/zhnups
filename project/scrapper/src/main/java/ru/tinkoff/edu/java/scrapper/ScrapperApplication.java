@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfig;
 
+
 @SpringBootApplication
 @EnableConfigurationProperties(ApplicationConfig.class)
 public class ScrapperApplication {

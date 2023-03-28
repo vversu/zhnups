@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import ru.tinkoff.edu.java.dto.ApiErrorResponse;
+import ru.tinkoff.edu.java.bot.dto.ApiErrorResponse;
 
 @RestControllerAdvice
 public class ExceptionController {
@@ -24,3 +24,4 @@ public class ExceptionController {
         );
     }
 }
+
