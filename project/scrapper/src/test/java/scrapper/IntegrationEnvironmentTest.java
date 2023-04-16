@@ -1,18 +1,24 @@
 package scrapper;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@Testcontainers
 public class IntegrationEnvironmentTest {
+  @Container
+  private static final PostgreSQLContainer<?> POSTGRES_CONTAINER =
+      new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"))
+          .withDatabaseName("scrapper")
+          .withUsername("polina")
+          .withPassword("123");
 
-    @Test
-    public void testContainerStartup() {
-    	PostgreSQLContainer<?> container = IntegrationEnvironment.POSTGRES_CONTAINER;
-
-        // Проверяем, что контейнер запущен
-        assertTrue(container.isRunning());
-    }
+  @Test
+  void testContainerStarted() {
+      assertTrue(POSTGRES_CONTAINER.isRunning());
+  }
 }

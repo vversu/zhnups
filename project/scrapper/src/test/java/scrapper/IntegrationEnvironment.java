@@ -16,16 +16,14 @@ import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
-import liquibase.resource.ClassLoaderResourceAccessor;
+import liquibase.resource.DirectoryResourceAccessor;
 
 public class IntegrationEnvironment {
     static final PostgreSQLContainer<?> POSTGRES_CONTAINER =
         new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"))
             .withDatabaseName("scrapper")
             .withUsername("polina")
-            .withPassword("123")
-            .withInitScript("tables.sql")
-            .withEnv("LANG", "en_US.utf8");
+            .withPassword("123");
     
 
     private static boolean started = false;
@@ -43,7 +41,7 @@ public class IntegrationEnvironment {
              Database database = DatabaseFactory.getInstance()
                  .findCorrectDatabaseImplementation(new JdbcConnection(connection))) {
             Liquibase liquibase = new Liquibase("migrations/master.xml",
-                                                new ClassLoaderResourceAccessor(),
+                                                new DirectoryResourceAccessor(new File("migrations")),
                                                 database);
             liquibase.update(new Contexts(), new LabelExpression());
         } catch (Exception e) {
