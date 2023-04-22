@@ -1,10 +1,25 @@
 package ru.tinkoff.edu.java.scrapper.configuration;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
 
-@Validated
-@ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
-public record ApplicationConfig(@NotNull String test, @NotBlank String schedulerInterval) {}
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.time.Duration;
+
+@Configuration
+@RequiredArgsConstructor
+public class ApplicationConfig {
+    private final ApplicationProperties applicationProperties;
+
+    @Bean
+    public Duration linkUpdateAge() {
+        return applicationProperties.linkUpdateAge();
+    }
+
+    @Bean
+    public long linkUpdateSchedulerIntervalMs() {
+        return applicationProperties.scheduler().interval().toMillis();
+    }
+
+}

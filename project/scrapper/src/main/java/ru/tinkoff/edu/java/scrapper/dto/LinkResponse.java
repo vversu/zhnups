@@ -1,3 +1,12 @@
 package ru.tinkoff.edu.java.scrapper.dto;
 
-public record LinkResponse(String url, String name) {}
+import lombok.Builder;
+
+import java.net.URI;
+
+@Builder
+public record LinkResponse(
+        long id,
+        URI url
+) {
+}

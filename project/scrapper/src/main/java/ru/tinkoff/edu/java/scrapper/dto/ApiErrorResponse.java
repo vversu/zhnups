@@ -1,3 +1,16 @@
 package ru.tinkoff.edu.java.scrapper.dto;
 
-public record ApiErrorResponse(String message) {}
+import lombok.Builder;
+
+import java.util.ArrayList;
+
+
+@Builder
+public record ApiErrorResponse(
+    String description,
+    String code,
+    String exceptionName,
+    String exceptionMessage,
+    ArrayList<String> stacktrace
+) {
+}
