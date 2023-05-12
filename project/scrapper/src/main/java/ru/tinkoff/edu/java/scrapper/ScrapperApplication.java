@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import ru.tinkoff.edu.java.scrapper.configuration.ApplicationProperties;
-import ru.tinkoff.edu.java.scrapper.configuration.GitHubConfiguration;
-import ru.tinkoff.edu.java.scrapper.configuration.StackOverflowConfiguration;
+import ru.tinkoff.edu.java.scrapper.configuration.client.GitHubConfiguration;
+import ru.tinkoff.edu.java.scrapper.configuration.client.StackOverflowConfiguration;
 
 
 @SpringBootApplication
@@ -17,9 +17,11 @@ import ru.tinkoff.edu.java.scrapper.configuration.StackOverflowConfiguration;
         StackOverflowConfiguration.class}
 )
 public class ScrapperApplication {
+
     public static void main(String[] args) {
         var ctx = SpringApplication.run(ScrapperApplication.class, args);
         ApplicationProperties config = ctx.getBean(ApplicationProperties.class);
+
         System.out.println(config);
     }
 }
