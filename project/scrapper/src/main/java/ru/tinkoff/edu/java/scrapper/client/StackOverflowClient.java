@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
-import ru.tinkoff.edu.java.scrapper.configuration.StackOverflowConfiguration;
+import ru.tinkoff.edu.java.scrapper.configuration.client.StackOverflowConfiguration;
 import ru.tinkoff.edu.java.scrapper.dto.response.StackOverflowQuestionResponse;
 import ru.tinkoff.edu.java.scrapper.dto.response.StackOverflowQuestionsResponse;
 
@@ -24,7 +24,7 @@ public class StackOverflowClient {
         return new StackOverflowClient(webClient);
     }
 
-    public Optional<StackOverflowQuestionResponse> fetchQuestion(long questionId) {
+    public Optional<StackOverflowQuestionResponse> fetchQuestion(String questionId) {
         String uri = String.format(GET_QUESTIONS_ENDPOINT, questionId);
 
         return webClient.get()
