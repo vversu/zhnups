@@ -1,19 +1,19 @@
 package ru.tinkoff.edu.java.scrapper.repository.jdbc;
 
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import ru.tinkoff.edu.java.scrapper.enums.ChatQuery;
 import ru.tinkoff.edu.java.scrapper.model.Chat;
+import ru.tinkoff.edu.java.scrapper.model.Link;
 import ru.tinkoff.edu.java.scrapper.repository.ChatRepository;
 
-import java.util.List;
-import java.util.Optional;
 
 
-//@Primary
-@Repository
+
+
 @RequiredArgsConstructor
 public class JdbcChatRepository implements ChatRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -30,9 +30,9 @@ public class JdbcChatRepository implements ChatRepository {
     }
 
     @Override
-    public List<Chat> findAllByLink(long linkId) {
+    public List<Chat> findAllByLink(Link link) {
         return jdbcTemplate.query(ChatQuery.SELECT_BY_LINK.query(),
-                new BeanPropertyRowMapper<>(Chat.class), linkId);
+                new BeanPropertyRowMapper<>(Chat.class), link.getId());
     }
 
     @Override

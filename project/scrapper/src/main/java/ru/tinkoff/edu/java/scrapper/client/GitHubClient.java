@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.tinkoff.edu.java.scrapper.configuration.GitHubConfiguration;
+import ru.tinkoff.edu.java.scrapper.configuration.client.GitHubConfiguration;
 import ru.tinkoff.edu.java.scrapper.dto.response.GitHubRepositoryResponse;
 
 import java.util.Optional;
@@ -25,6 +25,7 @@ public class GitHubClient {
                 .defaultHeader("X-GitHub-Api-Version", config.apiVersion())
                 .defaultHeader("Authorization", "Bearer %s".formatted(config.apiKey()))
                 .build();
+        log.info(config.apiKey());
         return new GitHubClient(webClient);
 
     }
@@ -41,7 +42,7 @@ public class GitHubClient {
 
     }
 
-    public Optional<Integer> fetchCommitsNumber(String owner, String repo) {
+    public Optional<Long> fetchCommitsNumber(String owner, String repo) {
         Pattern pattern = Pattern.compile("next.*page=(?<number>\\d+).*last");
         String uri = String.format(COMMIT_ENDPOINT, owner, repo, 1, 1);
 
@@ -51,11 +52,10 @@ public class GitHubClient {
                 .exchangeToMono(response -> Mono.just(response.headers().header("link").get(0)))
                 .onErrorResume(exception -> Mono.empty())
                 .blockOptional();
-
         return header.map(h -> {
             var matcher = pattern.matcher(header.get());
             matcher.find();
-            return Integer.parseInt(matcher.group("number"));
+            return Long.parseLong(matcher.group("number"));
         });
     }
 }

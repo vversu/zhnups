@@ -22,10 +22,10 @@ public abstract class IntegrationEnvironment {
     private static final Path CHANGELOG_PATH = new File("scrapper/migrations").toPath().toAbsolutePath();
 
     static {
-        DB_CONTAINER = new PostgreSQLContainer<>("postgres:14")
+        DB_CONTAINER = new PostgreSQLContainer<>("postgres:15")
                 .withDatabaseName("scrapper")
-                .withUsername("polina")
-                .withPassword("123");
+                .withUsername("postgres")
+                .withPassword("password");
         DB_CONTAINER.start();
 
         runMigrations();

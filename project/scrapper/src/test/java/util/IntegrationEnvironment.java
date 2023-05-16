@@ -18,17 +18,17 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.sql.SQLException;
 
-@Testcontainers
+//@Testcontainers
 public abstract class IntegrationEnvironment {
 
     protected static final PostgreSQLContainer<?> DB_CONTAINER;
     private static final Path CHANGELOG_PATH = new File("migrations").toPath().toAbsolutePath();
 
     static {
-        DB_CONTAINER = new PostgreSQLContainer<>("postgres:14")
+        DB_CONTAINER = new PostgreSQLContainer<>("postgres:15")
                 .withDatabaseName("scrapper")
-                .withUsername("polina")
-                .withPassword("123");
+                .withUsername("postgres")
+                .withPassword("password");
         DB_CONTAINER.start();
 
         runMigrations();
