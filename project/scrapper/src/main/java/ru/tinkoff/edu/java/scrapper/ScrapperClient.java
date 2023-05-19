@@ -15,7 +15,7 @@ public class ScrapperClient {
 
     private final WebClient webClient;
 
-    public ScrapperClient(@Value("${scrapper.base-url}") String baseUrl) {
+    public ScrapperClient(@Value("${app.base-url}") String baseUrl) {
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .build();

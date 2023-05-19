@@ -19,7 +19,7 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.DirectoryResourceAccessor;
 
 public class IntegrationEnvironment {
-    static final PostgreSQLContainer<?> POSTGRES_CONTAINER =
+    public static final PostgreSQLContainer<?> POSTGRES_CONTAINER =
         new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"))
             .withDatabaseName("scrapper")
             .withUsername("polina")
@@ -28,7 +28,7 @@ public class IntegrationEnvironment {
 
     private static boolean started = false;
 
-    static void startContainer() {
+    public static void startContainer() {
         if (!started) {
             POSTGRES_CONTAINER.start();
             started = true;

@@ -13,6 +13,6 @@ public class LinkUpdaterScheduler {
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     public void update() {
         logger.info("Updating links...");
-        // your code here
+        // some code here
     }
 }
